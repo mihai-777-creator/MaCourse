@@ -1,60 +1,39 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MaCourse | Plateforme de Cours en Ligne</title>
   <meta name="description" content="MaCourse - Plateforme educative moderne avec des cours en ligne de qualite.">
-  <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="data.js" defer></script>
-  <script src="/script.js" th:src="@{/script.js}" defer></script>
+  <link rel="stylesheet" th:href="@{/style.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script th:src="@{/script.js}" defer></script>
 </head>
 <body data-page="home">
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
-          <span class="brand-mark">M</span>
-          <strong>MaCourse</strong>
-          <small>Plateforme de Cours en Ligne</small>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
-            <li class="nav-item"><a class="nav-link" href="courses.html">Cours</a></li>
-            <li class="nav-item"><a class="nav-link" href="categories.html">Categories</a></li>
-            <li class="nav-item"><a class="nav-link" href="instructors.html">Instructeurs</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.html">A propos</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-outline-primary me-2" th:href="@{/login}">Connexion</a>
-            <a class="btn btn-primary" href="courses.html">Explorer</a>
-          </div>
-        </div>
-      </div>
+      <div th:replace="~{fragments/navbar :: navbar}"></div>
     </nav>
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 hero-copy">
             <p class="eyebrow">Bienvenue sur MaCourse</p>
-            <h1>Apprenez de nouvelles competences aupres d'experts mondiaux</h1>
+            <h1>Apprenez de nouvelles compétences auprès d'experts mondiaux</h1>
             <p class="hero-text">
-              Plateforme educative moderne avec des centaines de cours en programmation, design, business, marketing et plus encore.
-              Apprenez a votre rythme, avec un acces a vie et des certificats professionnels.
+              Plateforme éducative moderne avec des centaines de cours en programmation, design, business,
+              marketing et plus encore. Apprenez à votre rythme, avec un accès à vie et des certificats professionnels.
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="courses.html">Explorer les Cours</a>
+              <a class="btn btn-primary" th:href="@{/courses}">Explorer les Cours</a>
               <a class="btn btn-secondary" href="#featured-courses">Voir Populaires</a>
             </div>
             <div class="hero-utility">
@@ -66,8 +45,14 @@
               <div class="hero-toggle-panel">
                 <p class="clock-label">Quick controls</p>
                 <div class="hero-toggle-actions">
-                  <button type="button" class="button button-secondary button-sm" data-toggle-target="statsPanel" data-toggle-label-show="Afficher les stats" data-toggle-label-hide="Masquer les stats">Masquer les stats</button>
-                  <button type="button" class="button button-secondary button-sm" data-toggle-target="featuredPanel" data-toggle-label-show="Afficher les populaires" data-toggle-label-hide="Masquer les populaires">Masquer les populaires</button>
+                  <button type="button" class="button button-secondary button-sm"
+                          data-toggle-target="statsPanel"
+                          data-toggle-label-show="Afficher les stats"
+                          data-toggle-label-hide="Masquer les stats">Masquer les stats</button>
+                  <button type="button" class="button button-secondary button-sm"
+                          data-toggle-target="featuredPanel"
+                          data-toggle-label-show="Afficher les populaires"
+                          data-toggle-label-hide="Masquer les populaires">Masquer les populaires</button>
                 </div>
               </div>
             </div>
@@ -76,7 +61,7 @@
           <aside class="col-lg-4 hero-stats">
             <div class="stat-item">
               <div class="stat-number" data-count-value="156000" data-count-format="compact">156K+</div>
-              <div class="stat-label">Etudiants Actifs</div>
+              <div class="stat-label">Étudiants Actifs</div>
             </div>
             <div class="stat-item">
               <div class="stat-number" data-count-value="250" data-count-suffix="+">250+</div>
@@ -88,18 +73,19 @@
             </div>
             <div class="stat-item">
               <div class="stat-number" data-count-value="45000" data-count-format="compact">45K+</div>
-              <div class="stat-label">Certificats Delivres</div>
+              <div class="stat-label">Certificats Délivrés</div>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
+    <!-- STATISTICS -->
     <section class="section statistics-section">
       <div class="container">
         <div class="section-heading centered">
-          <h2>Les Chiffres Parlent d'Eux-Memes</h2>
-          <p>Une communaute mondiale dediee a l'apprentissage continu et au developpement professionnel.</p>
+          <h2>Les Chiffres Parlent d'Eux-Mêmes</h2>
+          <p>Une communauté mondiale dédiée à l'apprentissage continu et au développement professionnel.</p>
         </div>
         <div class="row stats-grid" id="statsPanel">
           <div class="col-md-6 col-lg-3 stat-card">
@@ -111,135 +97,187 @@
           <div class="col-md-6 col-lg-3 stat-card">
             <div class="stat-icon">👥</div>
             <div class="stat-number" data-count-value="156000" data-count-format="compact">156K+</div>
-            <div class="stat-title">Etudiants Actifs</div>
+            <div class="stat-title">Étudiants Actifs</div>
             <p>De plus de 150 pays, apprenant et grandissant chaque jour.</p>
           </div>
           <div class="col-md-6 col-lg-3 stat-card">
             <div class="stat-icon">🏆</div>
             <div class="stat-number" data-count-value="50" data-count-suffix="+">50+</div>
             <div class="stat-title">Instructeurs Experts</div>
-            <p>Professionnels avec des annees d'experience dans l'industrie.</p>
+            <p>Professionnels avec des années d'expérience dans l'industrie.</p>
           </div>
           <div class="col-md-6 col-lg-3 stat-card">
             <div class="stat-icon">📜</div>
             <div class="stat-number" data-count-value="45000" data-count-format="compact">45K+</div>
-            <div class="stat-title">Certificats Emis</div>
+            <div class="stat-title">Certificats Émis</div>
             <p>Reconnu professionnellement dans le monde entier.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- CATEGORIES -->
     <section class="section categories-section">
       <div class="container">
         <div class="section-heading centered">
-          <h2>Explorez les Categories Populaires</h2>
-          <p>Choisissez le domaine qui vous interesse et commencez a apprendre maintenant.</p>
+          <h2>Explorez les Catégories Populaires</h2>
+          <p>Choisissez le domaine qui vous intéresse et commencez à apprendre maintenant.</p>
         </div>
-        <div class="categories-grid" id="categoriesGrid"></div>
+        <div class="categories-grid">
+          <a th:each="cat : ${categories}"
+             th:href="@{/courses(category=${cat.id})}"
+             class="category-card"
+             th:style="'--cat-color:' + ${cat.color}">
+            <div class="category-icon" th:text="${cat.icon}">💻</div>
+            <div class="category-name" th:text="${cat.name}">Catégorie</div>
+          </a>
+        </div>
         <div class="centered-cta">
-          <a class="button button-secondary" href="categories.html">Voir Toutes les Categories</a>
+          <a class="button button-secondary" th:href="@{/categories}">Voir Toutes les Catégories</a>
         </div>
       </div>
     </section>
 
+    <!-- FEATURED COURSES -->
     <section class="section featured-courses-section" id="featured-courses">
       <div class="container">
         <div class="section-heading centered">
-          <h2>Cours Recommandes</h2>
-          <p>Les cours les plus populaires et les mieux notes de la plateforme.</p>
+          <h2>Cours Recommandés</h2>
+          <p>Les cours les plus populaires et les mieux notés de la plateforme.</p>
         </div>
         <div class="section-toolbar">
-          <button type="button" class="button button-secondary button-sm" data-toggle-target="featuredPanel" data-toggle-label-show="Afficher les cours" data-toggle-label-hide="Masquer les cours">Masquer les cours</button>
+          <button type="button" class="button button-secondary button-sm"
+                  data-toggle-target="featuredPanel"
+                  data-toggle-label-show="Afficher les cours"
+                  data-toggle-label-hide="Masquer les cours">Masquer les cours</button>
         </div>
         <div class="featured-slider-shell" id="featuredPanel">
           <div class="featured-slider" id="featuredSlider">
-            <button type="button" class="featured-slider-button" id="featuredPrev" aria-label="Voir les cours precedents">&#8592;</button>
+            <button type="button" class="featured-slider-button" id="featuredPrev" aria-label="Précédent">&#8592;</button>
             <div class="featured-slider-viewport">
-              <div class="featured-slider-track" id="featuredSliderTrack"></div>
+              <div class="featured-slider-track" id="featuredSliderTrack">
+                <div th:each="course : ${featuredCourses}" class="featured-slide">
+                  <article class="course-card">
+                    <div class="course-header">
+                      <div th:if="${course.bestSeller}" class="badge badge-bestseller" style="position:absolute;top:.75rem;left:.75rem;z-index:1;">Bestseller</div>
+                      <div th:if="${course.free}" class="badge badge-free" style="position:absolute;top:.75rem;left:.75rem;z-index:1;">Gratuit</div>
+                      <div class="course-image" th:text="${course.image}">📖</div>
+                    </div>
+                    <div class="course-body">
+                      <p class="course-category" th:text="${course.category.name}">Catégorie</p>
+                      <h3 th:text="${course.title}">Titre</h3>
+                      <p class="course-description" th:text="${#strings.abbreviate(course.description, 100)}">Description</p>
+                      <div class="course-meta">
+                        <span class="meta-item">⭐ <span th:text="${course.rating}">4.9</span></span>
+                        <span class="meta-item">👥 <span th:text="${course.students}">1000</span></span>
+                        <span class="meta-item">📚 <span th:text="${course.lessons}">80</span> leçons</span>
+                      </div>
+                      <div class="course-footer">
+                        <div class="course-price" th:classappend="${course.free} ? 'price-free'">
+                          <span th:if="${course.free}">Gratuit</span>
+                          <span th:unless="${course.free}" th:text="${course.price + '€'}">199€</span>
+                        </div>
+                        <a th:href="@{/course-details(id=${course.id})}" class="button button-primary button-sm">Détails</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
             </div>
-            <button type="button" class="featured-slider-button" id="featuredNext" aria-label="Voir les cours suivants">&#8594;</button>
+            <button type="button" class="featured-slider-button" id="featuredNext" aria-label="Suivant">&#8594;</button>
           </div>
           <div class="featured-slider-dots" id="featuredSliderDots"></div>
         </div>
         <div class="centered-cta">
-          <a class="button button-primary" href="courses.html">Explorer Tous les Cours</a>
+          <a class="button button-primary" th:href="@{/courses}">Explorer Tous les Cours</a>
         </div>
       </div>
     </section>
 
+    <!-- BENEFITS -->
     <section class="section benefits-section">
       <div class="container">
         <div class="section-heading centered">
           <h2>Pourquoi Choisir MaCourse ?</h2>
-          <p>Avantages exclusifs qui vous aideront a progresser plus vite.</p>
+          <p>Avantages exclusifs qui vous aideront à progresser plus vite.</p>
         </div>
         <div class="row benefits-grid">
-          <div class="col-md-6 col-lg-4 benefit-card">
-            <div class="benefit-icon">⏰</div>
-            <h3>Apprenez a Votre Rythme</h3>
-            <p>Accedez aux cours n'importe quand, n'importe ou, sans pression inutile.</p>
-          </div>
-          <div class="col-md-6 col-lg-4 benefit-card">
-            <div class="benefit-icon">👨‍🏫</div>
-            <h3>Instructeurs Experts</h3>
-            <p>Apprenez aupres de professionnels avec une experience concrete du terrain.</p>
-          </div>
-          <div class="col-md-6 col-lg-4 benefit-card">
-            <div class="benefit-icon">📜</div>
-            <h3>Certificats Professionnels</h3>
-            <p>Obtenez des certificats reconnus qui soutiennent votre progression.</p>
-          </div>
-          <div class="col-md-6 col-lg-4 benefit-card">
-            <div class="benefit-icon">💬</div>
-            <h3>Communaute Active</h3>
-            <p>Connectez-vous avec d'autres etudiants, collaborez et grandissez ensemble.</p>
-          </div>
-          <div class="col-md-6 col-lg-4 benefit-card">
-            <div class="benefit-icon">🎯</div>
-            <h3>Contenu Pratique</h3>
-            <p>Des projets reels et des etudes de cas qui vous preparent au travail.</p>
-          </div>
-          <div class="col-md-6 col-lg-4 benefit-card">
-            <div class="benefit-icon">🔁</div>
-            <h3>Acces a Vie</h3>
-            <p>Chaque cours reste accessible avec des mises a jour gratuites.</p>
-          </div>
+          <div class="col-md-6 col-lg-4 benefit-card"><div class="benefit-icon">⏰</div><h3>Apprenez à Votre Rythme</h3><p>Accédez aux cours n'importe quand, n'importe où, sans pression.</p></div>
+          <div class="col-md-6 col-lg-4 benefit-card"><div class="benefit-icon">👨‍🏫</div><h3>Instructeurs Experts</h3><p>Apprenez auprès de professionnels avec une expérience concrète.</p></div>
+          <div class="col-md-6 col-lg-4 benefit-card"><div class="benefit-icon">📜</div><h3>Certificats Professionnels</h3><p>Obtenez des certificats reconnus qui soutiennent votre progression.</p></div>
+          <div class="col-md-6 col-lg-4 benefit-card"><div class="benefit-icon">💬</div><h3>Communauté Active</h3><p>Connectez-vous avec d'autres étudiants, collaborez et grandissez ensemble.</p></div>
+          <div class="col-md-6 col-lg-4 benefit-card"><div class="benefit-icon">🎯</div><h3>Contenu Pratique</h3><p>Des projets réels et des études de cas qui vous préparent au travail.</p></div>
+          <div class="col-md-6 col-lg-4 benefit-card"><div class="benefit-icon">🔁</div><h3>Accès à Vie</h3><p>Chaque cours reste accessible avec des mises à jour gratuites.</p></div>
         </div>
       </div>
     </section>
 
+    <!-- TESTIMONIALS (static marketing content) -->
     <section class="section testimonials-section">
       <div class="container">
         <div class="section-heading centered">
-          <h2>Ce Disent Nos Etudiants</h2>
-          <p>Des milliers d'etudiants ont transforme leur carriere grace a MaCourse.</p>
+          <h2>Ce Que Disent Nos Étudiants</h2>
+          <p>Des milliers d'étudiants ont transformé leur carrière grâce à MaCourse.</p>
         </div>
-        <div class="testimonials-grid" id="testimonialsGrid"></div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-content">«&nbsp;Les cours de JavaScript et React m'ont aidé à trouver mon emploi. Je recommande vivement&nbsp;!&nbsp;»</p>
+            <div class="testimonial-author"><span class="testimonial-avatar">👨‍💻</span><div><strong>Mihai Georgescu</strong><small>Developer</small></div></div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">«&nbsp;Le cours UI/UX design a été transformateur. J'ai appliqué immédiatement ce que j'ai appris.&nbsp;»</p>
+            <div class="testimonial-author"><span class="testimonial-avatar">👩‍🎨</span><div><strong>Laura Popescu</strong><small>Designer UX</small></div></div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">«&nbsp;Le cours d'Entrepreneuriat m'a donné les outils pour lancer ma startup.&nbsp;»</p>
+            <div class="testimonial-author"><span class="testimonial-avatar">👔</span><div><strong>Cristian Ionescu</strong><small>Entrepreneur</small></div></div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">«&nbsp;Marketing Digital Complet est le cours que je cherchais. Très pratique et à jour.&nbsp;»</p>
+            <div class="testimonial-author"><span class="testimonial-avatar">👩‍💼</span><div><strong>Andrada Vasile</strong><small>Marketing Specialist</small></div></div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-content">«&nbsp;Les instructeurs sont des professionnels passionnés. Ça vaut chaque centime investi&nbsp;!&nbsp;»</p>
+            <div class="testimonial-author"><span class="testimonial-avatar">🎓</span><div><strong>David Popovici</strong><small>Étudiant</small></div></div>
+          </div>
+        </div>
       </div>
     </section>
 
+    <!-- INSTRUCTORS -->
     <section class="section instructors-section">
       <div class="container">
         <div class="section-heading centered">
           <h2>Instructeurs de Top</h2>
-          <p>Professionnels passionnes qui partagent leurs connaissances et leur experience.</p>
+          <p>Professionnels passionnés qui partagent leurs connaissances et leur expérience.</p>
         </div>
-        <div class="instructors-grid" id="instructorsGrid"></div>
+        <div class="instructors-grid">
+          <div th:each="inst : ${instructors}" class="instructor-card">
+            <div class="instructor-avatar" th:text="${inst.avatar}">👨‍💼</div>
+            <h3 class="instructor-name" th:text="${inst.name}">Nom</h3>
+            <p class="instructor-title" th:text="${inst.title}">Titre</p>
+            <p class="instructor-bio" th:text="${#strings.abbreviate(inst.bio, 120)}">Bio</p>
+            <div class="instructor-specialties">
+              <span th:each="spec : ${inst.specialties}" class="specialty-tag" th:text="${spec}">Spec</span>
+            </div>
+            <p class="instructor-students">👥 <span th:text="${inst.studentCount}">0</span> étudiants</p>
+          </div>
+        </div>
         <div class="centered-cta">
-          <a class="button button-secondary" href="instructors.html">Decouvrez Tous les Instructeurs</a>
+          <a class="button button-secondary" th:href="@{/instructors}">Découvrez Tous les Instructeurs</a>
         </div>
       </div>
     </section>
 
+    <!-- CTA -->
     <section class="section cta-section">
       <div class="container">
         <div class="cta-content">
-          <h2>Pret a Commencer Votre Voyage Educatif ?</h2>
-          <p>Choisissez parmi des centaines de cours et transformez votre carriere aujourd'hui.</p>
+          <h2>Prêt à Commencer Votre Voyage Éducatif ?</h2>
+          <p>Choisissez parmi des centaines de cours et transformez votre carrière aujourd'hui.</p>
           <div class="cta-buttons">
-            <a class="button button-primary" href="courses.html">Explorer les Cours</a>
-            <a class="button button-secondary" href="contact.html">Contacter le Support</a>
+            <a class="button button-primary" th:href="@{/courses}">Explorer les Cours</a>
+            <a class="button button-secondary" th:href="@{/contact}">Contacter le Support</a>
           </div>
         </div>
       </div>
@@ -251,7 +289,7 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h3>MaCourse</h3>
-          <p>Plateforme educative moderne avec des cours en ligne de qualite dans tous les domaines.</p>
+          <p>Plateforme éducative moderne avec des cours en ligne de qualité dans tous les domaines.</p>
           <div class="footer-social">
             <a href="#" title="Facebook">f</a>
             <a href="#" title="Twitter">t</a>
@@ -260,41 +298,41 @@
           </div>
         </div>
         <div class="footer-col">
-          <h4>Navigare</h4>
+          <h4>Navigation</h4>
           <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="courses.html">Cours</a></li>
-            <li><a href="categories.html">Categories</a></li>
-            <li><a href="instructors.html">Instructeurs</a></li>
-            <li><a href="about.html">A propos</a></li>
+            <li><a th:href="@{/index}">Accueil</a></li>
+            <li><a th:href="@{/courses}">Cours</a></li>
+            <li><a th:href="@{/categories}">Catégories</a></li>
+            <li><a th:href="@{/instructors}">Instructeurs</a></li>
+            <li><a th:href="@{/about}">À propos</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Support</h4>
           <ul>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="faq.html">FAQ</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li><a th:href="@{/faq}">FAQ</a></li>
             <li><a th:href="@{/login}">Connexion</a></li>
             <li><a href="#">Termes d'utilisation</a></li>
-            <li><a href="#">Politique de confidentialite</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Contact</h4>
-          <p>support@macourse.md<br>+373 (22) 123-456<br>Chișinău, Moldova<br>Lundi - Vendredi : 09:00 - 18:00</p>
+          <p>support@macourse.md<br>+373 (22) 123-456<br>Chișinău, Moldova<br>Lun–Ven : 09:00–18:00</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 MaCourse. Tous droits reserves.</p>
+        <p>&copy; 2024 MaCourse. Tous droits réservés.</p>
       </div>
     </div>
   </footer>
 
+  <!-- Modal course preview -->
   <div class="modal fade" id="courseModal" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="courseModalLabel">Details du Cours</h5>
+          <h5 class="modal-title" id="courseModalLabel">Détails du Cours</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
         <div class="modal-body" id="courseModalBody"></div>
@@ -305,5 +343,31 @@
       </div>
     </div>
   </div>
+
+  <style>
+    .category-card { display:flex; flex-direction:column; align-items:center; gap:.5rem; padding:1.5rem 1rem;
+                     background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+                     text-decoration:none; color:var(--text); transition:transform .2s,box-shadow .2s; }
+    .category-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); color:var(--cat-color,var(--primary)); }
+    .category-icon { font-size:2.2rem; }
+    .category-name { font-weight:600; font-size:.95rem; text-align:center; }
+    .testimonials-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.5rem; }
+    .testimonial-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; }
+    .testimonial-content { font-style:italic; margin-bottom:1rem; }
+    .testimonial-author { display:flex; align-items:center; gap:.8rem; }
+    .testimonial-avatar { font-size:1.8rem; }
+    .testimonial-author div { display:flex; flex-direction:column; }
+    .instructor-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+                       padding:1.5rem; text-align:center; }
+    .instructor-avatar { font-size:3rem; margin-bottom:.5rem; }
+    .instructor-name { margin:.5rem 0 .25rem; }
+    .instructor-title { font-size:.9rem; color:var(--muted); margin-bottom:.5rem; }
+    .instructor-bio { font-size:.85rem; color:var(--muted); margin-bottom:.8rem; }
+    .instructor-specialties { display:flex; flex-wrap:wrap; gap:.4rem; justify-content:center; margin-bottom:.8rem; }
+    .specialty-tag { background:var(--surface-soft); border:1px solid var(--border); border-radius:20px;
+                     padding:.2rem .7rem; font-size:.8rem; }
+    .instructor-students { font-size:.85rem; color:var(--muted); margin:0; }
+    .featured-slide { min-width:300px; }
+  </style>
 </body>
 </html>

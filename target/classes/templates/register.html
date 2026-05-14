@@ -1,86 +1,59 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inscription | MaCourse</title>
-  <link rel="stylesheet" href="/style.css" th:href="@{/style.css}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="/script.js" th:src="@{/script.js}" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaCourse | Plateforme de Cours en Ligne</title>
+    <meta name="description" content="MaCourse - Plateforme educative moderne avec des cours en ligne de qualite.">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <script th:src="@{/script.js}" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body data-page="register">
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">
-          <span class="brand-mark">M</span>
-          <strong>MaCourse</strong>
-          <small>Plateforme de Cours en Ligne</small>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" th:href="@{/}">Accueil</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/courses}">Cours</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/categories}">Catégories</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/instructors}">Instructeurs</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/about}">À propos</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/faq}">FAQ</a></li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-outline-primary me-2" th:href="@{/login}">Connexion</a>
-            <a class="btn btn-primary" th:href="@{/dashboard}">Dashboard</a>
-          </div>
-        </div>
-      </div>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
     </nav>
   </header>
 
   <main class="auth-main">
     <div class="container auth-container">
       <div class="auth-card">
-        <h1 class="auth-title">Créer un compte</h1>
-        <p class="auth-subtitle">Rejoignez des milliers d'apprenants sur MaCourse</p>
+        <h1 class="auth-title">Creer un compte</h1>
+        <p class="auth-subtitle">Rejoignez des milliers d'apprenants sur MaCourse.</p>
 
-        <!-- Status messages from server -->
-        <div th:if="${error}" class="alert alert-danger" role="alert">[[${error}]]</div>
-        <div th:if="${success}" class="alert alert-success" role="alert">[[${success}]]</div>
+        <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
-        <!-- Register Form (Thymeleaf POST) -->
         <form th:action="@{/register}" method="post" novalidate>
-          <div class="form-field">
+          <div class="form-field auth-field">
             <label for="username">Nom d'utilisateur</label>
-            <input type="text" id="username" name="username" placeholder="jeandupont" required>
+            <input type="text" id="username" name="username" placeholder="jeandupont" required autocomplete="username">
           </div>
 
-          <div class="form-field">
+          <div class="form-field auth-field">
             <label for="registerEmail">Adresse e-mail</label>
-            <input type="email" id="registerEmail" name="email" placeholder="votre@email.com" required>
+            <input type="email" id="registerEmail" name="email" placeholder="votre@email.com" required autocomplete="email">
           </div>
 
-          <div class="form-field">
+          <div class="form-field auth-field">
             <label for="registerPassword">Mot de passe</label>
-            <input type="password" id="registerPassword" name="password" placeholder="Min. 6 caractères" required>
-            <small class="text-muted">Doit contenir au moins une majuscule și un chiffre</small>
+            <input type="password" id="registerPassword" name="password" placeholder="Min. 6 caracteres" required autocomplete="new-password">
+            <small class="text-muted">Le mot de passe doit avoir cel putin 6 caractere.</small>
           </div>
 
           <div class="form-check mb-3">
             <input class="form-check-input" type="checkbox" id="termsCheck" required>
             <label class="form-check-label" for="termsCheck">
-              J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a>
+              J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialite</a>.
             </label>
           </div>
 
-          <button type="submit" class="button button-primary auth-submit" id="submitBtn" style="width: 100%;">Créer mon compte</button>
+          <button type="submit" class="button button-primary auth-submit" style="width:100%;">Creer mon compte</button>
         </form>
 
-        <!-- Login Link -->
         <div class="auth-links text-center">
-          <p class="mt-3">Vous avez déjà un compte ? <a th:href="@{/login}">Se connecter</a></p>
+          <p class="mt-3">Vous avez deja un compte ? <a th:href="@{/login}">Se connecter</a></p>
         </div>
       </div>
     </div>
@@ -91,140 +64,10 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h3>MaCourse</h3>
-          <p>Plateforme d'apprentissage en ligne innovante et accessible à tous.</p>
+          <p>Plateforme d'apprentissage en ligne moderne si accesibila.</p>
         </div>
-        <div class="footer-col">
-          <h3>Navigation</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li><a th:href="@{/}">Accueil</a></li>
-            <li><a th:href="@{/courses}">Nos Cours</a></li>
-            <li><a th:href="@{/about}">À Propos</a></li>
-            <li><a th:href="@{/contact}">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h3>Informations</h3>
-          <ul style="list-style: none; padding: 0;">
-            <li><a href="#">Conditions d'utilisation</a></li>
-            <li><a href="#">Politique de confidentialité</a></li>
-            <li><a href="#">Mentions légales</a></li>
-          </ul>
-        </div>
-      </div>
-      <div style="text-align: center; padding-top: 1.5rem; border-top: 1px solid #e0e0e0; margin-top: 1.5rem;">
-        <p style="margin: 0; font-size: 0.9rem;">&copy; 2024 MaCourse. Tous droits réservés.</p>
       </div>
     </div>
   </footer>
-
-  <script>
-    const registerForm = document.getElementById('registerForm');
-    const passwordInput = document.getElementById('registerPassword');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const successAlert = document.getElementById('successAlert');
-    const errorAlert = document.getElementById('errorAlert');
-    const successMessage = document.getElementById('successMessage');
-    const errorMessage = document.getElementById('errorMessage');
-    const submitBtn = document.getElementById('submitBtn');
-
-    // Form submission
-    registerForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-
-      // Reset alerts
-      successAlert.classList.add('d-none');
-      errorAlert.classList.add('d-none');
-
-      const fullName = document.getElementById('fullName').value.trim();
-      const email = document.getElementById('registerEmail').value.trim();
-      const password = passwordInput.value;
-      const confirmPassword = confirmPasswordInput.value;
-      const termsCheck = document.getElementById('termsCheck').checked;
-
-      // Validation
-      if (!fullName) {
-        errorMessage.textContent = 'Le nom complet est obligatoire.';
-        errorAlert.classList.remove('d-none');
-        return;
-      }
-
-      if (!email) {
-        errorMessage.textContent = 'L\'adresse e-mail est obligatoire.';
-        errorAlert.classList.remove('d-none');
-        return;
-      }
-
-      if (password.length < 6) {
-        errorMessage.textContent = 'Le mot de passe doit contenir au moins 6 caractères.';
-        errorAlert.classList.remove('d-none');
-        return;
-      }
-
-      if (!/[A-Z]/.test(password)) {
-        errorMessage.textContent = 'Le mot de passe doit contenir au moins une majuscule.';
-        errorAlert.classList.remove('d-none');
-        return;
-      }
-
-      if (!/[0-9]/.test(password)) {
-        errorMessage.textContent = 'Le mot de passe doit contenir au moins un chiffre.';
-        errorAlert.classList.remove('d-none');
-        return;
-      }
-
-      if (password !== confirmPassword) {
-        errorMessage.textContent = 'Les mots de passe ne correspondent pas.';
-        errorAlert.classList.remove('d-none');
-        return;
-      }
-
-      if (!termsCheck) {
-        errorMessage.textContent = 'Vous devez accepter les conditions d\'utilisation.';
-        errorAlert.classList.remove('d-none');
-        return;
-      }
-
-      // Disable submit button
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Création en cours...';
-
-      try {
-        const response = await fetch('/register/save', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            fullName: fullName,
-            email: email,
-            password: password
-          })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          successMessage.textContent = data.success || 'Compte créé avec succès! Redirection...';
-          successAlert.classList.remove('d-none');
-          registerForm.reset();
-          
-          // Redirect to login after 2 seconds
-          setTimeout(() => {
-            window.location.href = '/login';
-          }, 2000);
-        } else {
-          errorMessage.textContent = data.error || 'Une erreur s\'est produite.';
-          errorAlert.classList.remove('d-none');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        errorMessage.textContent = 'Erreur de connexion. Veuillez réessayer.';
-        errorAlert.classList.remove('d-none');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Créer mon compte';
-      }
-    });
-  </script>
 </body>
 </html>

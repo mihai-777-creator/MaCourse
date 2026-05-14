@@ -1,59 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Questions Fréquentes | MaCourse</title>
-  <link rel="stylesheet" th:href="@{/style.css}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="data.js" defer></script>
-  <script th:src="@{/script.js}" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaCourse | FAQ</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <script th:src="@{/script.js}" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">
-          <span class="brand-mark">M</span>
-          <strong>MaCourse</strong>
-          <small>Plateforme de Cours en Ligne</small>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Accueil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="courses.html">Cours</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categories.html">Catégories</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="instructors.html">Instructeurs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">À propos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="faq.html">FAQ</a>
-            </li>
-          </ul>
-          <div class="d-flex">
-            <a class="btn btn-outline-primary me-2" th:href="@{/login}">Connexion</a>
-            <a class="btn btn-primary" href="dashboard.html">Dashboard</a>
-          </div>
-        </div>
-      </div>
+      <div th:replace="~{fragments/navbar :: navbar}"></div>
     </nav>
   </header>
+
   <main>
     <section class="page-hero">
       <div class="container">
@@ -62,39 +27,89 @@
         <p>Réponses aux questions communes de nos étudiants.</p>
       </div>
     </section>
+
     <section class="section">
-      <div class="container">
-        <div class="accordion" id="faqAccordion"></div>
-      </div>
-    </section>
-  </main>
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3>MaCourse</h3>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('faqAccordion');
-      container.innerHTML = faqItems.map((item, idx) => `
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="heading${idx}">
-            <button class="accordion-button ${idx === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${idx}" aria-expanded="${idx === 0 ? 'true' : 'false'}" aria-controls="collapse${idx}">
-              ${item.question}
-            </button>
-          </h2>
-          <div id="collapse${idx}" class="accordion-collapse collapse ${idx === 0 ? 'show' : ''}" aria-labelledby="heading${idx}" data-bs-parent="#faqAccordion">
-            <div class="accordion-body">
-              ${item.answer}
+      <div class="container" style="max-width:860px;">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h1">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#c1" aria-expanded="true">
+                Que sont les cours gratuits ?
+              </button>
+            </h2>
+            <div id="c1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Les cours gratuits sont des cours complets qui ne nécessitent pas de paiement. Ils sont disponibles pour tous les utilisateurs et offrent un contenu de haute qualité, idéal pour découvrir la plateforme ou apprendre des compétences spécifiques sans investissement financier.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h2">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                Puis-je me faire rembourser si je ne suis pas satisfait ?
+              </button>
+            </h2>
+            <div id="c2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Oui ! Nous offrons une garantie de remboursement de 30 jours. Si vous n'êtes pas satisfait du cours pour quelque raison que ce soit, vous pouvez demander un remboursement complet dans les 30 premiers jours après l'achat.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h3">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
+                Combien de temps ai-je accès aux cours achetés ?
+              </button>
+            </h2>
+            <div id="c3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Vous avez accès à vie aux cours que vous achetez. Vous pouvez revenir à tout moment pour réviser les matériaux et accéder à toutes les ressources supplémentaires.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h4">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c4">
+                Les cours incluent-ils des certificats ?
+              </button>
+            </h2>
+            <div id="c4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Tous nos cours incluent des certificats de fin. Après avoir terminé le cours et réussi les tests finaux, vous recevrez un certificat téléchargeable.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h5">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c5">
+                Ai-je besoin d'un logiciel spécial pour les cours de programmation ?
+              </button>
+            </h2>
+            <div id="c5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Non. Tous les cours de programmation sont faciles à suivre avec un ordinateur standard et un éditeur de texte gratuit. Les instructions de configuration se trouvent dans les premières leçons.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h6">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c6">
+                Comment fonctionne le support étudiant ?
+              </button>
+            </h2>
+            <div id="c6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Le support est disponible via la page <a th:href="@{/contact}">Contact</a>. Les questions courantes sont répondues en 24 heures. De plus, chaque cours a une communauté d'étudiants où vous pouvez demander de l'aide.</div>
             </div>
           </div>
         </div>
-      `).join('');
-    });
-  </script>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h3>MaCourse</h3><p>Plateforme éducative moderne.</p></div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a th:href="@{/index}">Accueil</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2024 MaCourse. Tous droits réservés.</p></div>
+    </div>
+  </footer>
 </body>
 </html>

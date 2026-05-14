@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div th:fragment="navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">
+            <span class="brand-mark">M</span>
+            <strong>MaCourse</strong>
+            <small>Plateforme de Cours en Ligne</small>
+        </a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index}">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/courses}">Cours</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/categories}">Catégories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/instructors}">Instructeurs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">À propos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/faq}">FAQ</a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-2">
+                <!-- Not authenticated -->
+                <div sec:authorize="!isAuthenticated()" class="d-flex gap-2">
+                    <a class="btn btn-outline-primary" th:href="@{/login}">Connexion</a>
+                    <a class="btn btn-primary" th:href="@{/register}">Inscription</a>
+                </div>
+
+                <!-- Authenticated -->
+                <div sec:authorize="isAuthenticated()" class="d-flex align-items-center gap-2">
+                    <a class="btn btn-outline-primary" th:href="@{/dashboard}">Dashboard</a>
+                    <form th:action="@{/logout}" method="post" class="m-0">
+                        <button type="submit" class="btn btn-secondary">Déconnexion</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
